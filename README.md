@@ -123,12 +123,7 @@ Add screenshots here after running the project locally.
 - Weather integration
 - Trip sharing/export to PDF
 - Saved nearby-place favorites
-- Production-grade API caching and rate-limit protection
-
-## Interview preparation
-
-### 2-minute explanation
-"Path to Plan is a full-stack travel planning application built using Python Flask, SQLite, HTML, CSS and JavaScript. The user searches for a starting location and destination. Nominatim converts the text into coordinates, and OSRM calculates a route with distance and estimated time. Leaflet displays the interactive map using OpenStreetMap tiles. The application also uses the Overpass API to find real nearby hospitals, bus stations, railway stations, airports, seaports, hotels and restaurants around both the starting point and destination. Results are sorted by distance and shown with map locations and available details. The selected trip can be stored in SQLite. I separated geocoding, routing and nearby-place logic into service modules so the external providers can be replaced later."
+- Production-grade API caching and rate-limit protectio
 
 ### Module explanation
 - `app.py`: Flask routes and API orchestration.
@@ -156,59 +151,7 @@ The backend builds category-based Overpass queries around the selected latitude/
 ### Why OpenStreetMap/Leaflet?
 They are open-source/open-data friendly and avoid hard-coded API keys for this project. Leaflet is lightweight and works well with OpenStreetMap tiles.
 
-### Challenges and solutions
-1. API failures → timeouts, error messages and graceful fallback.
-2. Location permission denied → manual search remains available.
-3. Missing OSM fields → show "Information not available."
-4. Different OSM element types → handle node/way/relation centers.
-5. Search radius → user-selectable 1/2/5/10 km.
-6. UI responsiveness → CSS grid and mobile breakpoints.
 
-### 20 technical interview questions
-1. Why Flask? — It is lightweight and suitable for a modular Python web application.
-2. Why SQLite? — It is simple, file-based and sufficient for this project.
-3. What is an API? — A defined interface that lets software systems exchange data.
-4. What is geocoding? — Converting a place name/address into coordinates.
-5. What is reverse geocoding? — Converting coordinates into a readable place/address.
-6. What is Leaflet? — A JavaScript library for interactive maps.
-7. What is OpenStreetMap? — An open geographic database and map-data ecosystem.
-8. What is Nominatim? — An OpenStreetMap search/geocoding service.
-9. What is OSRM? — An open routing engine used here for route geometry, distance and duration.
-10. What is Overpass API? — A query service for retrieving selected OpenStreetMap objects.
-11. Why separate services? — Separation of concerns makes code easier to test and replace.
-12. How does the browser call Flask? — With HTTP requests using JavaScript `fetch()`.
-13. How is route distance obtained? — OSRM returns distance in meters; the backend converts it to km.
-14. How is travel time obtained? — OSRM returns duration in seconds; the backend converts it to minutes.
-15. How are nearby results sorted? — Haversine distance is calculated and results are sorted ascending.
-16. How is fake data avoided? — Place details are read from the external map dataset; missing fields are not guessed.
-17. What happens if geolocation is denied? — The user can manually search a location.
-18. Why no hard-coded API keys? — The selected public services do not require keys for this demo architecture.
-19. How is SQL data protected? — SQLite parameterized queries are used instead of string-concatenated SQL.
-20. What is a limitation? — Public services may be rate-limited and OSM coverage is not uniform.
-
-### 10 project follow-up questions
-1. How would you implement full multi-destination routing?
-2. How would you add authentication?
-3. How would you cache repeated nearby searches?
-4. How would you handle API rate limits?
-5. How would you deploy Flask in production?
-6. How would you add weather?
-7. How would you add public transport schedules?
-8. How would you export a trip as PDF?
-9. How would you test the service modules?
-10. How would you scale SQLite to many users?
-
-### Simple answers
-- Multi-destination: use OSRM table/route capabilities or another routing provider and optimize stop order.
-- Authentication: add a users table, password hashing and session-based login.
-- Caching: cache geocoding and nearby responses with a TTL.
-- Rate limits: throttle requests, cache results and use a production provider.
-- Deployment: use Gunicorn behind a reverse proxy and HTTPS.
-- Weather: integrate a reliable weather API behind a separate service module.
-- Transport: integrate a reliable licensed/public transport data source.
-- PDF: render a server-side travel summary with a PDF library.
-- Testing: unit-test service parsing, validation and database functions.
-- Scaling: migrate persistence to PostgreSQL and introduce caching.
 
 ## Important disclaimer
 Nearby place information is provided for reference. Please verify availability and contact details before relying on it.
